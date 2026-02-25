@@ -1,0 +1,177 @@
+/* Retell AI Voice Widget Styles */
+:root {
+  --retell-primary: #4185F4;
+  --retell-secondary: #656565;
+  --retell-error: #EA4235;
+  --retell-success: #34A853;
+  --retell-warning: #FBBC05;
+  --retell-bg: rgba(255, 255, 255, 0.8);
+  --retell-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --retell-border: rgba(255, 255, 255, 0.18);
+}
+
+.retell-widget-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.retell-widget-bubble {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background: var(--retell-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(65, 133, 244, 0.4);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.retell-widget-bubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(65, 133, 244, 0.5);
+}
+
+.retell-widget-bubble svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+  transition: transform 0.3s ease;
+}
+
+.retell-widget-bubble.active {
+  background: var(--retell-error);
+  box-shadow: 0 4px 16px rgba(234, 66, 53, 0.4);
+}
+
+.retell-widget-bubble.active svg {
+  transform: rotate(135deg);
+}
+
+.retell-widget-panel {
+  width: 300px;
+  background: var(--retell-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid var(--retell-border);
+  box-shadow: var(--retell-shadow);
+  margin-bottom: 16px;
+  padding: 20px;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.retell-widget-panel.open {
+  display: flex;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.retell-status-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.retell-status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--retell-secondary);
+}
+
+.retell-status-indicator.connecting {
+  background: var(--retell-warning);
+  animation: pulse 1s infinite alternate;
+}
+
+.retell-status-indicator.active {
+  background: var(--retell-success);
+}
+
+.retell-status-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.retell-visualizer {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.retell-visualizer-bar {
+  width: 4px;
+  height: 8px;
+  background: var(--retell-primary);
+  border-radius: 2px;
+  transition: height 0.1s ease;
+}
+
+@keyframes pulse {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+.retell-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.retell-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.retell-btn-end {
+  background: rgba(234, 66, 53, 0.1);
+  color: var(--retell-error);
+  width: 100%;
+}
+
+.retell-btn-end:hover {
+  background: rgba(234, 66, 53, 0.2);
+}
+
+/* Tooltip message */
+.retell-tooltip {
+    position: absolute;
+    right: 70px;
+    top: 10px;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.retell-widget-container:hover .retell-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+}
